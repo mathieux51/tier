@@ -1,0 +1,10 @@
+[package]
+name = "tool"
+version = "0.1.0"
+authors = ["Mathieu <mathieux51@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rusoto_core = "0.42"
+rusoto_s3 = "0.42"
+rusoto_credential = "0.42"

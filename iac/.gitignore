@@ -1,0 +1,6 @@
+.terraform
+terraform.tfstate
+plan
+crash.log
+terraform.tfstate.backup
+planfile

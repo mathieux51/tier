@@ -1,0 +1,5 @@
+resources:
+  - docker-registry-secret.yaml
+  - aws-credentials-secret.yaml
+  - tool-job.yaml
+  - tool-namespace.yaml

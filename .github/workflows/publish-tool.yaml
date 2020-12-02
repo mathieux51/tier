@@ -1,0 +1,31 @@
+name: Publish tool
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v*
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  DOCKER_EMAIL: ${{ secrets.DOCKER_EMAIL }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build image
+        run: make docker-build
+        working-directory: tool
+      - name: Login to registry
+        run: make docker-login
+        working-directory: tool
+      - name: Push image to registry
+        run: |
+          make docker-push
+        working-directory: tool
